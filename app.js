@@ -14,7 +14,13 @@ const server = http.createServer(function(request, response){
 
     // POST 방식
     if(request.method === 'POST'){
-        
+        if(request.url === '/index.html' ){
+            const filePath = fs.readFileSync('./index.html')
+            response.writeHead(200, {'Content-Type' : 'text/html'}).end(filePath);
+            request.on('data', (data) =>{
+                console.log(data);
+            })
+        }
     }
 
 })
